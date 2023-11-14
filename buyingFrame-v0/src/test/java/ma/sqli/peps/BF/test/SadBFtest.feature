@@ -9,11 +9,8 @@ Feature: BuyingFrame
     """
     {
     "libelle": "libelle-2",
-    "code": "code-2",
-
-
-
-
+    "code": "code-2"
+    }
     """
     Given path ''
     And request postBody
