@@ -1,0 +1,116 @@
+{
+    "from-to": "Elements from {first} to {last} (total {totalRecords})",
+    "new" : "Nouveau",
+    "search": "Chercher",
+    "export": "Exporter",
+    "validate": "Validater",
+    "search": "Chercher...",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Sauvgarder",
+    "next": "Suivant",
+    "yes": "Oui",
+    "no": "Non",
+    "actions": "Actions",
+    "confirm": "Confirmer",
+    "creation": "Creation",
+    "list": "Liste",
+
+
+    "slot":{
+        "type": "Type",
+        "typePlaceHolder": "Select a Type",
+        "typePlaceHolderFilter": "Search by Type",
+        "pdpContainer": "Pdp container",
+        "pdpContainerPlaceHolder": "Select a Pdp container",
+        "pdpContainerPlaceHolderFilter": "Search by Pdp container",
+        "slot": "Slot",
+        "tabPan": "Slot",
+        "header": "Liste des slots",
+        "deleteSlotConfirmationMessage": "Voulez vous vraiment supprimer slot",
+        "deleteSlotsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "slotType":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "slotType": "Slot type",
+        "tabPan": "Slot type",
+        "header": "Liste des slot types",
+        "deleteSlotTypeConfirmationMessage": "Voulez vous vraiment supprimer slot type",
+        "deleteSlotTypesConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "containerType":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "containerType": "Container type",
+        "tabPan": "Container type",
+        "header": "Liste des container types",
+        "deleteContainerTypeConfirmationMessage": "Voulez vous vraiment supprimer container type",
+        "deleteContainerTypesConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "containerVersion":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "containerVersion": "Container version",
+        "tabPan": "Container version",
+        "header": "Liste des container versions",
+        "deleteContainerVersionConfirmationMessage": "Voulez vous vraiment supprimer container version",
+        "deleteContainerVersionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "productType":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "productType": "Product type",
+        "tabPan": "Product type",
+        "header": "Liste des product types",
+        "deleteProductTypeConfirmationMessage": "Voulez vous vraiment supprimer product type",
+        "deleteProductTypesConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "pdpContainer":{
+        "productType": "Product type",
+        "productTypePlaceHolder": "Select a Product type",
+        "productTypePlaceHolderFilter": "Search by Product type",
+        "productCode": "Product code",
+        "code": "Code",
+        "buyingFrame": "Buying frame",
+        "active": "Active",
+        "hasOnlineVersion": "Has online version",
+        "hasSection": "Has section",
+        "label": "Label",
+        "title": "Title",
+        "type": "Type",
+        "typePlaceHolder": "Select a Type",
+        "typePlaceHolderFilter": "Search by Type",
+        "version": "Version",
+        "versionPlaceHolder": "Select a Version",
+        "versionPlaceHolderFilter": "Search by Version",
+        "slots": "Slots",
+        "slotsPlaceHolder": "Select multiple Types",
+        "name": "Name",
+        "pdpContainer": "Pdp container",
+        "tabPan": "Pdp container",
+        "header": "Liste des pdp containers",
+        "deletePdpContainerConfirmationMessage": "Voulez vous vraiment supprimer pdp container",
+        "deletePdpContainersConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+"appName": "GED"
+}
+
+

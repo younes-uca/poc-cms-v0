@@ -1,0 +1,34 @@
+{
+    "from-to": "Elements from {first} to {last} (total {totalRecords})",
+    "new" : "Nouveau",
+    "search": "Chercher",
+    "export": "Exporter",
+    "validate": "Validater",
+    "search": "Chercher...",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Sauvgarder",
+    "next": "Suivant",
+    "yes": "Oui",
+    "no": "Non",
+    "actions": "Actions",
+    "confirm": "Confirmer",
+    "creation": "Creation",
+    "list": "Liste",
+
+
+    "productType":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "productType": "Product type",
+        "tabPan": "Product type",
+        "header": "Liste des product types",
+        "deleteProductTypeConfirmationMessage": "Voulez vous vraiment supprimer product type",
+        "deleteProductTypesConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+"appName": "GED"
+}
+
+
