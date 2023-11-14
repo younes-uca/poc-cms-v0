@@ -12,36 +12,57 @@ Feature: BuyingFrame
     * postBody.code = uuid()
 
 
-  Scenario: POST Buying frame and GET it by ID
+  @duplicate
+  Scenario Outline: POST Order Boutique Twice with same code - expect <responseCode> as response code
+    * postBody.code = uniqueId
+    * def order_boutique_count = db.readValue('select count(*) FROM bf.buying_frame')
+
     * path ''
     * header Authorization = 'Bearer ' + adminToken
     * request postBody
     * method POST
-    * status 201
+    * status <responseCode>
+    * eval if(__num==1 && order_boutique_count != db.readValue('select count(*) FROM bf.buying_frame')) karate.fail("order_boutique count values are different")
 
-    * def output = response.output
+    Examples:
+      | responseCode |
+      | 201          |
+      | 226          |
 
-    * path 'id', output.id
+
+  Scenario: Fail - GetByID Not Found
+
+    * path 'id', 99999999
     * header Authorization = 'Bearer ' + adminToken
     * method GET
-    * status 200
+    * status 404
+    * match response.length == 0
 
 
-  Scenario: DELETE Buying frame and GET all
 
-    * path 'reference/order-5'
-    * header Authorization = 'Bearer ' + adminToken
-    * method DELETE
-    * status 200
-
-    * def output = response.output
+  Scenario: Fail - POST Order Boutique without Body
 
     * path ''
     * header Authorization = 'Bearer ' + adminToken
-    * method GET
-    * status 204
-    # Todo: 200 in case there is other orders, otherwise 204 if no order in DB
+    * method POST
+    * status 400
+    * match response.error == "Bad Request"
 
 
 
+  Scenario: Fail - POST Order Boutique without Authorization
 
+    * path ''
+    * method POST
+    * status 401
+    * match response.error == "Unauthorized"
+
+
+
+  Scenario: Fail - Save Order with method PATCH
+
+    * path ''
+    * header Authorization = 'Bearer ' + adminToken
+    * method PATCH
+    * status 405
+    * match response.error == "Method Not Allowed"

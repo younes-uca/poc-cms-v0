@@ -1,11 +1,11 @@
 @ignore
-Feature: common routine that does not update reference
+Feature: common variables
 
   Background:
     * def uuid = function() { return '' + java.util.UUID.randomUUID(); }
     * def DbUtils = Java.type('ma.sqli.peps.karate.util.DbUtils')
 
-  Scenario: Setting Global variables
+  Scenario: Setting adminToken as Global variables
     * def uniqueId = uuid()
     * def db = new DbUtils(datasource)
 

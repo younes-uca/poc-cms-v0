@@ -41,8 +41,7 @@ public class DbUtils {
         return jdbc.queryForList(query);
     }
     public void cleanUp() {
-        jdbc.update("DELETE FROM `peps-order`.order_line");
-        jdbc.update("DELETE FROM `peps-order`.order_boutique");
+        jdbc.update("DELETE FROM bf.buying_frame");
     }
 
 }
