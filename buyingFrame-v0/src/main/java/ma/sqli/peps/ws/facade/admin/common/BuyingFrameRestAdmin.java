@@ -1,38 +1,26 @@
-package  ma.sqli.peps.ws.facade.admin.common;
+package ma.sqli.peps.ws.facade.admin.common;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
 import ma.sqli.peps.bean.core.common.BuyingFrame;
 import ma.sqli.peps.dao.criteria.core.common.BuyingFrameCriteria;
 import ma.sqli.peps.service.facade.admin.common.BuyingFrameAdminService;
 import ma.sqli.peps.ws.converter.common.BuyingFrameConverter;
 import ma.sqli.peps.ws.dto.common.BuyingFrameDto;
 import ma.sqli.peps.zynerator.controller.AbstractController;
-import ma.sqli.peps.zynerator.dto.AuditEntityDto;
+import ma.sqli.peps.zynerator.dto.FileTempDto;
 import ma.sqli.peps.zynerator.util.PaginatedList;
-
-
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.sqli.peps.zynerator.process.Result;
-
-
-import org.springframework.web.multipart.MultipartFile;
-import ma.sqli.peps.zynerator.dto.FileTempDto;
 
 @RestController
 @RequestMapping("/api/admin/buyingFrame/")
-public class BuyingFrameRestAdmin  extends AbstractController<BuyingFrame, BuyingFrameDto, BuyingFrameCriteria, BuyingFrameAdminService, BuyingFrameConverter> {
-
+public class BuyingFrameRestAdmin extends AbstractController<BuyingFrame, BuyingFrameDto, BuyingFrameCriteria, BuyingFrameAdminService, BuyingFrameConverter> {
 
 
     @Operation(summary = "upload one buyingFrame")
@@ -40,6 +28,7 @@ public class BuyingFrameRestAdmin  extends AbstractController<BuyingFrame, Buyin
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @Operation(summary = "upload multiple buyingFrames")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -76,6 +65,21 @@ public class BuyingFrameRestAdmin  extends AbstractController<BuyingFrame, Buyin
         return super.save(dto);
     }
 
+
+    @Operation(summary = "send buyingFrame using Kafka Topic")
+    @PostMapping("send")
+    public ResponseEntity<String> send(@RequestBody BuyingFrameDto dto) {
+        BuyingFrame item = converter.toItem(dto);
+        try {
+            service.send(item);
+            return new ResponseEntity<>("Buying Frame saved and sent", HttpStatus.CREATED);
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>("Buying Frame sending error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+
     @Operation(summary = "Updates the specified  buyingFrame")
     @PutMapping("")
     public ResponseEntity<BuyingFrameDto> update(@RequestBody BuyingFrameDto dto) throws Exception {
@@ -87,10 +91,11 @@ public class BuyingFrameRestAdmin  extends AbstractController<BuyingFrame, Buyin
     public ResponseEntity<List<BuyingFrameDto>> delete(@RequestBody List<BuyingFrameDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @Operation(summary = "Delete the specified buyingFrame")
     @DeleteMapping("")
     public ResponseEntity<BuyingFrameDto> delete(@RequestBody BuyingFrameDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @Operation(summary = "Delete the specified buyingFrame")
@@ -98,11 +103,12 @@ public class BuyingFrameRestAdmin  extends AbstractController<BuyingFrame, Buyin
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @Operation(summary = "Delete multiple buyingFrames by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @Operation(summary = "Finds buyingFrames by criteria")
@@ -130,12 +136,9 @@ public class BuyingFrameRestAdmin  extends AbstractController<BuyingFrame, Buyin
     }
 
 
-
-    public BuyingFrameRestAdmin (BuyingFrameAdminService service, BuyingFrameConverter converter) {
+    public BuyingFrameRestAdmin(BuyingFrameAdminService service, BuyingFrameConverter converter) {
         super(service, converter);
     }
-
-
 
 
 }
