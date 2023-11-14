@@ -6,44 +6,78 @@ Feature: BuyingFrame
     * url bfUrl
     * header Content-Type = 'application/json'
 
-    * def postBody = read('../data/Save.json')
+    * def postBody = read('../data/SaveBF.json')
+    * def FindAllSchema = read('../schema/FindAll.json')
     * def uuid = function() { return '' + java.util.UUID.randomUUID(); }
-    * postBody.reference = uuid()
+    * postBody.code = uuid()
 
 
   Scenario: POST Buying frame and GET it by ID
-    * def postBody =
-    """
-    {
-    "libelle": "libelle-2",
-    "code": "code-2"
-    }
-    """
-    Given path ''
-    And request postBody
-    When method POST
-    Then status 201
-
-    * def output = response.output
-
-    Given path 'id', output.id
-    When method GET
-    Then status 200
+    * path ''
+    * header Authorization = 'Bearer ' + adminToken
+    * request postBody
+    * method POST
+    * status 201
 
 
-  Scenario: DELETE Buying frame and GET all
-
-    Given path 'reference/order-5'
-    When method DELETE
-    Then status 200
-
-    * def output = response.output
-
-    Given path ''
-    When method GET
-    Then status 204
-    # Todo: 200 in case there is other orders, otherwise 204 if no order in DB
+    * path 'id', response.id
+    * header Authorization = 'Bearer ' + adminToken
+    * method GET
+    * status 200
+    * karate.match("each response contains FindAllSchema")
 
 
+  Scenario: DELETE Buying frame and GET it
+
+    # POST a BF
+    * path ''
+    * header Authorization = 'Bearer ' + adminToken
+    * request postBody
+    * method POST
+    * status 201
+    * def bfId = response.id
+
+    # Assert that the BF exist
+    * path 'id', bfId
+    * header Authorization = 'Bearer ' + adminToken
+    * method GET
+    * status 200
+
+    # Delete the BF
+    * path 'id', bfId
+    * header Authorization = 'Bearer ' + adminToken
+    * method DELETE
+    * status 200
+
+
+    # Assert that the BF not exist successfully
+    * path 'id', bfId
+    * header Authorization = 'Bearer ' + adminToken
+    * method GET
+    * status 404
+
+
+  @FindAll
+  Scenario Outline: Find All BF (204 & 200)
+
+    * def payload = ("<method>" == "POST") ? postBody : {}
+    * postBody.code = uniqueId
+
+    * path <paths>
+    * header Authorization = 'Bearer ' + adminToken
+    * request payload
+    * method <method>
+    * status <responseCode>
+    * def res = karate.match(<matching>[0])
+    * match res == { pass: true, message: null }
+    * def res = karate.match(<matching>[1])
+    * match res == { pass: true, message: null }
+
+
+    Examples:
+      | responseCode | paths         | method | matching                                                                                 |
+      | 204          | ''            | GET    | ["response.length == 0", "payload != ''"]                                                |
+      | 201          | ''            | POST   | ["payload != ''", "payload != ''"]                                                       |
+      | 200          | ''            | GET    | ["each response contains FindAllSchema "," response[0].code == postBody.code"] |
 
 

@@ -1,24 +1,4 @@
 {
-  "reference": "order-9",
-  "orderLines": [
-    {
-      "price": 10.0,
-      "quantity": 2.0,
-      "quantityReceived": 7.0,
-      "product": {
-        "id": 1,
-        "libelle": "p1",
-        "code": "p1"
-      }
-    },
-    {
-      "price": 5.0,
-      "quantity": 3.0,
-      "product": {
-        "id": 2,
-        "libelle": "p2",
-        "code": "p2"
-      }
-    }
-  ]
+  "libelle": "libelle2",
+  "code": ""
 }
