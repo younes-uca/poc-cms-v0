@@ -59,7 +59,6 @@ public class PdpContainerRestAdmin  extends AbstractController<PdpContainer, Pdp
         return super.findById(id, includes, excludes);
     }
 
-
     @Operation(summary = "Saves the specified  pdpContainer")
     @PostMapping("")
     public ResponseEntity<PdpContainerDto> save(@RequestBody PdpContainerDto dto) throws Exception {

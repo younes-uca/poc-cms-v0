@@ -35,8 +35,9 @@ public class Slot   extends AuditBusinessObject     {
     }
 
 
-
-
+    public Slot(SlotType type) {
+        this.type = type;
+    }
 
     @Id
     @Column(name = "id")
