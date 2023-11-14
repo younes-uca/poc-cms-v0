@@ -1,12 +1,12 @@
 function fn() {
 
-    
-    var config = {};
-    
-   
-    const rootUrlDev = 'http://localhost:8036/';
+
+    var config = {}
+
+
+    const rootUrlDev = 'http://localhost:8037/';
     const adminCredentialsDev = {"username": "admin","password": "123"};
-    const urlDev = 'jdbc:mysql://localhost:3306/peps-order';
+    const urlDev = 'jdbc:mysql://localhost:3306/bf';
     const usernameDev = 'root';
     const passwordDev = '';
     const driverDev = 'com.mysql.cj.jdbc.Driver';
@@ -14,19 +14,19 @@ function fn() {
 
     const rootUrlInit = 'https://stage-host/';
     const adminCredentialsInit = {"username": "admin","password": "123"};
-    const urlInit = 'jdbc:mysql://localhost:3306/peps-order';
+    const urlInit = 'jdbc:mysql://localhost:3306/bf';
     const usernameInit = 'root';
     const passwordInit = '';
     const driverInit = 'com.mysql.cj.jdbc.Driver';
-    
-    
+
+
     const rootUrlE2e = 'https://e2e-host/';
     const adminCredentialsE2e = {"username": "admin","password": "123"};
-    const urlE2e = 'jdbc:mysql://localhost:3306/peps-order';
+    const urlE2e = 'jdbc:mysql://localhost:3306/bf';
     const usernameE2e = 'root';
     const passwordE2e = '';
     const driverE2e = 'com.mysql.cj.jdbc.Driver';
-    
+
     var env = karate.env; // get java system property 'karate.env'
     if (!env || env=='dev') {
         env = 'dev';
@@ -47,9 +47,9 @@ function fn() {
 
     config.actuatorUri = config.rootUrl + 'actuator/';
     config.adminUri = config.rootUrl + 'api/admin/';
-    config.orderBoutiqueUrl = config.adminUri + 'orderBoutique/';
+    config.bfUrl = config.adminUri + 'buyingFrame/';
 
-    common = karate.callSingle('classpath:common.feature', config);
+    common = karate.callSingle('classpath:ma/sqli/peps/BF/test/common.feature', config);
     config.uniqueId = common.uniqueId
     config.db = common.db
     config.adminToken = common.adminToken

@@ -1,10 +1,11 @@
-package ma.peps.sqli.app;
+package ma.sqli.peps.app;
+
 
 import com.intuit.karate.junit5.Karate;
 import org.junit.jupiter.api.BeforeAll;
 
 
-public class DevTestRunner {
+public class TestRunner {
 
 
     @BeforeAll
@@ -13,10 +14,9 @@ public class DevTestRunner {
     }
 
     @Karate.Test
-    Karate InfoAppTest() {
-        return Karate.run("test/AppStatusTest").relativeTo(getClass());
+    Karate AppStatusTest() {
+        return Karate.run("AppStatusTest").relativeTo(getClass());
     }
-
 
 
 }
