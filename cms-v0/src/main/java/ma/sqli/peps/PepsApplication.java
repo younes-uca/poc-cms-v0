@@ -1,31 +1,29 @@
 package ma.sqli.peps;
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import java.util.*;
-import java.util.stream.Stream;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import org.springframework.cache.annotation.EnableCaching;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
-
-import ma.sqli.peps.zynerator.security.common.AuthoritiesConstants;
-import ma.sqli.peps.zynerator.security.bean.User;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import ma.sqli.peps.bean.core.common.SlotType;
+import ma.sqli.peps.service.facade.admin.common.SlotTypeAdminService;
 import ma.sqli.peps.zynerator.security.bean.Permission;
 import ma.sqli.peps.zynerator.security.bean.Role;
-import ma.sqli.peps.zynerator.security.service.facade.UserService;
+import ma.sqli.peps.zynerator.security.bean.User;
+import ma.sqli.peps.zynerator.security.common.AuthoritiesConstants;
 import ma.sqli.peps.zynerator.security.service.facade.RoleService;
-
-//import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import ma.sqli.peps.zynerator.security.service.facade.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @EnableCaching
@@ -35,16 +33,16 @@ public class PepsApplication {
     public static ConfigurableApplicationContext ctx;
 
     public static void main(String[] args) {
-        ctx=SpringApplication.run(PepsApplication.class, args);
+        ctx = SpringApplication.run(PepsApplication.class, args);
     }
 
     @Bean
-    RestTemplate restTemplate(){
+    RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
     @Bean
-    ObjectMapper objectMapper(){
+    ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         objectMapper.registerModule(new JavaTimeModule());
@@ -57,30 +55,31 @@ public class PepsApplication {
 
     @Bean
     public CommandLineRunner demo(UserService userService, RoleService roleService) {
-    return (args) -> {
-        if(true){
+        for (int i = 1; i <= 5; i++) {
+            slotTypeService.findOrSave(new SlotType(i * 1L, "slot-type-" + i));
+        }
+        return (args) -> {
+            if (true) {
 
 
+                // Role admin
 
-    // Role admin
 
-        User userForAdmin = new User("admin");
+                User userForAdmin = new User("admin");
 
-        Role roleForAdmin = new Role();
-        roleForAdmin.setAuthority(AuthoritiesConstants.ADMIN);
-        List<Permission> permissionsForAdmin = new ArrayList<>();
-        addPermissionForAdmin(permissionsForAdmin);
-        roleForAdmin.setPermissions(permissionsForAdmin);
-        if(userForAdmin.getRoles()==null)
-            userForAdmin.setRoles(new ArrayList<>());
+                Role roleForAdmin = new Role();
+                roleForAdmin.setAuthority(AuthoritiesConstants.ADMIN);
+                List<Permission> permissionsForAdmin = new ArrayList<>();
+                addPermissionForAdmin(permissionsForAdmin);
+                roleForAdmin.setPermissions(permissionsForAdmin);
+                if (userForAdmin.getRoles() == null)
+                    userForAdmin.setRoles(new ArrayList<>());
 
-        userForAdmin.getRoles().add(roleForAdmin);
-        userService.save(userForAdmin);
+                userForAdmin.getRoles().add(roleForAdmin);
+                userService.save(userForAdmin);
             }
         };
     }
-
-
 
 
     private static String fakeString(String attributeName, int i) {
@@ -88,10 +87,11 @@ public class PepsApplication {
     }
 
     private static Long fakeLong(String attributeName, int i) {
-        return  10L * i;
+        return 10L * i;
     }
+
     private static Integer fakeInteger(String attributeName, int i) {
-        return  10 * i;
+        return 10 * i;
     }
 
     private static Double fakeDouble(String attributeName, int i) {
@@ -99,16 +99,18 @@ public class PepsApplication {
     }
 
     private static BigDecimal fakeBigDecimal(String attributeName, int i) {
-        return  BigDecimal.valueOf(i*1L*10);
+        return BigDecimal.valueOf(i * 1L * 10);
     }
 
     private static Boolean fakeBoolean(String attributeName, int i) {
         return i % 2 == 0 ? true : false;
     }
+
     private static LocalDateTime fakeLocalDateTime(String attributeName, int i) {
         return LocalDateTime.now().plusDays(i);
     }
-    private static void addPermissionForAdmin(List<Permission> permissions){
+
+    private static void addPermissionForAdmin(List<Permission> permissions) {
         permissions.add(new Permission("Slot.edit"));
         permissions.add(new Permission("Slot.list"));
         permissions.add(new Permission("Slot.view"));
@@ -140,6 +142,9 @@ public class PepsApplication {
         permissions.add(new Permission("PdpContainer.add"));
         permissions.add(new Permission("PdpContainer.delete"));
     }
+
+    @Autowired
+    private SlotTypeAdminService slotTypeService;
 
 }
 
