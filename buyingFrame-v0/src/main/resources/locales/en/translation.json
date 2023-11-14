@@ -1,0 +1,33 @@
+{
+    "from-to": "Elements from {first} to {last} (total {totalRecords})",
+    "new" : "New",
+    "search": "Search",
+    "export": "Export",
+    "validate": "Validate",
+    "search": "Seach...",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No",
+    "actions": "Actions",
+    "confirm": "Confirm",
+    "creation": "Creation",
+    "list": "List",
+
+
+    "buyingFrame":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "buyingFrame": "Buying frame",
+        "tabPan": "Buying frame",
+        "header": "Liste des buying frames",
+        "deleteBuyingFrameConfirmationMessage": "Are you sure you want to delete buying frame",
+        "deleteBuyingFramesConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+"appName": "GED"
+}
+
+

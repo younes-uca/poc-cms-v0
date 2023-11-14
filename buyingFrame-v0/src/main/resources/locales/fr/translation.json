@@ -1,0 +1,34 @@
+{
+    "from-to": "Elements from {first} to {last} (total {totalRecords})",
+    "new" : "Nouveau",
+    "search": "Chercher",
+    "export": "Exporter",
+    "validate": "Validater",
+    "search": "Chercher...",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Sauvgarder",
+    "next": "Suivant",
+    "yes": "Oui",
+    "no": "Non",
+    "actions": "Actions",
+    "confirm": "Confirmer",
+    "creation": "Creation",
+    "list": "Liste",
+
+
+    "buyingFrame":{
+        "libelle": "Libelle",
+        "code": "Code",
+        "buyingFrame": "Buying frame",
+        "tabPan": "Buying frame",
+        "header": "Liste des buying frames",
+        "deleteBuyingFrameConfirmationMessage": "Voulez vous vraiment supprimer buying frame",
+        "deleteBuyingFramesConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+"appName": "GED"
+}
+
+
