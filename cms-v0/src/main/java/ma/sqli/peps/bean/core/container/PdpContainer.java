@@ -165,6 +165,26 @@ public class PdpContainer   extends AuditBusinessObject     {
     }
 
     @Override
+    public String toString() {
+        return "PdpContainer{" +
+                "id=" + id +
+                ", productCode='" + productCode + '\'' +
+                ", code='" + code + '\'' +
+                ", buyingFrame='" + buyingFrame + '\'' +
+                ", active=" + active +
+                ", hasOnlineVersion=" + hasOnlineVersion +
+                ", hasSection=" + hasSection +
+                ", label='" + label + '\'' +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", productType=" + productType +
+                ", type=" + type +
+                ", version=" + version +
+                ", slots=" + slots +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id);
     }

@@ -25,9 +25,9 @@ import java.util.concurrent.CompletableFuture;
 public class BuyingFrameAdminServiceImpl extends AbstractServiceImpl<BuyingFrame, BuyingFrameCriteria, BuyingFrameDao> implements BuyingFrameAdminService {
 
 
-    public static final String TOPIC = "javatechie-demo2";
+    public static final String TOPIC = "buying-frame-v2";
     @Autowired
-    private KafkaTemplate<String, Object> template;
+    private KafkaTemplate<String, Object> template; // Spring cloud Stream
     @Autowired
     private ObjectMapper objectMapper;
 

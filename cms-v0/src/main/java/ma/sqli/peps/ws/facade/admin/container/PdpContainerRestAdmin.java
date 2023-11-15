@@ -1,38 +1,27 @@
-package  ma.sqli.peps.ws.facade.admin.container;
+package ma.sqli.peps.ws.facade.admin.container;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
 import ma.sqli.peps.bean.core.container.PdpContainer;
 import ma.sqli.peps.dao.criteria.core.container.PdpContainerCriteria;
 import ma.sqli.peps.service.facade.admin.container.PdpContainerAdminService;
 import ma.sqli.peps.ws.converter.container.PdpContainerConverter;
 import ma.sqli.peps.ws.dto.container.PdpContainerDto;
 import ma.sqli.peps.zynerator.controller.AbstractController;
-import ma.sqli.peps.zynerator.dto.AuditEntityDto;
+import ma.sqli.peps.zynerator.dto.FileTempDto;
 import ma.sqli.peps.zynerator.util.PaginatedList;
-
-
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.sqli.peps.zynerator.process.Result;
-
-
-import org.springframework.web.multipart.MultipartFile;
-import ma.sqli.peps.zynerator.dto.FileTempDto;
 
 @RestController
 @RequestMapping("/api/admin/pdpContainer/")
-public class PdpContainerRestAdmin  extends AbstractController<PdpContainer, PdpContainerDto, PdpContainerCriteria, PdpContainerAdminService, PdpContainerConverter> {
-
+public class PdpContainerRestAdmin extends AbstractController<PdpContainer, PdpContainerDto, PdpContainerCriteria, PdpContainerAdminService, PdpContainerConverter> {
 
 
     @Operation(summary = "upload one pdpContainer")
@@ -40,6 +29,7 @@ public class PdpContainerRestAdmin  extends AbstractController<PdpContainer, Pdp
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @Operation(summary = "upload multiple pdpContainers")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -76,10 +66,11 @@ public class PdpContainerRestAdmin  extends AbstractController<PdpContainer, Pdp
     public ResponseEntity<List<PdpContainerDto>> delete(@RequestBody List<PdpContainerDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @Operation(summary = "Delete the specified pdpContainer")
     @DeleteMapping("")
     public ResponseEntity<PdpContainerDto> delete(@RequestBody PdpContainerDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @Operation(summary = "Delete the specified pdpContainer")
@@ -87,33 +78,49 @@ public class PdpContainerRestAdmin  extends AbstractController<PdpContainer, Pdp
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @Operation(summary = "Delete multiple pdpContainers by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @Operation(summary = "find by type id")
     @GetMapping("type/id/{id}")
-    public List<PdpContainerDto> findByTypeId(@PathVariable Long id){
+    public List<PdpContainerDto> findByTypeId(@PathVariable Long id) {
         return findDtos(service.findByTypeId(id));
     }
+
     @Operation(summary = "delete by type id")
     @DeleteMapping("type/id/{id}")
-    public int deleteByTypeId(@PathVariable Long id){
+    public int deleteByTypeId(@PathVariable Long id) {
         return service.deleteByTypeId(id);
     }
+
     @Operation(summary = "find by version id")
     @GetMapping("version/id/{id}")
-    public List<PdpContainerDto> findByVersionId(@PathVariable Long id){
+    public List<PdpContainerDto> findByVersionId(@PathVariable Long id) {
         return findDtos(service.findByVersionId(id));
     }
+
+    @Operation(summary = "find by version id")
+    @GetMapping("receive/buyingFrame/code/{buyingFrameDtoAsString}")
+    public ResponseEntity<String> receive(@PathVariable String buyingFrameDtoAsString) {
+        try {
+            PdpContainer receive = service.receive(buyingFrameDtoAsString);
+            return new ResponseEntity<>("pdp  received :: " + receive.toString(), HttpStatus.CREATED);
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @Operation(summary = "delete by version id")
     @DeleteMapping("version/id/{id}")
-    public int deleteByVersionId(@PathVariable Long id){
+    public int deleteByVersionId(@PathVariable Long id) {
         return service.deleteByVersionId(id);
     }
+
     @Operation(summary = "Finds a pdpContainer and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<PdpContainerDto> findWithAssociatedLists(@PathVariable Long id) {
@@ -145,12 +152,9 @@ public class PdpContainerRestAdmin  extends AbstractController<PdpContainer, Pdp
     }
 
 
-
-    public PdpContainerRestAdmin (PdpContainerAdminService service, PdpContainerConverter converter) {
+    public PdpContainerRestAdmin(PdpContainerAdminService service, PdpContainerConverter converter) {
         super(service, converter);
     }
-
-
 
 
 }
