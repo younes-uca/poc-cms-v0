@@ -8,39 +8,36 @@ import ma.sqli.peps.zynerator.dto.AuditBaseDto;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BuyingFrameDto extends AuditBaseDto {
 
-    private String libelle  ;
-    private String code  ;
+    private String libelle;
+    private String code;
 
 
-
-
-    public BuyingFrameDto(){
+    public BuyingFrameDto() {
         super();
     }
 
 
+    public BuyingFrameDto(String code) {
+        this.code = code;
+    }
 
     @Log
-    public String getLibelle(){
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
 
     @Log
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
-
-
-
-
-
-
 
 
 }

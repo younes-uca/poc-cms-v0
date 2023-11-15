@@ -53,7 +53,7 @@ public class PdpContainerAdminServiceImpl extends AbstractServiceImpl<PdpContain
     @Override
     @KafkaListener(topics = "buying-frame-v2", groupId = "buying-frame-consumer-1")
     public PdpContainer receive(String buyingFrameDtoAsString) throws JsonProcessingException {
-        BuyingFrameDto buyingFrameDto = objectMapper.readValue(buyingFrameDtoAsString,BuyingFrameDto.class);
+        BuyingFrameDto buyingFrameDto = new BuyingFrameDto(buyingFrameDtoAsString);
         System.out.println("**************** received :::: buyingFrameDto = " + buyingFrameDto);
         PdpContainer pdpContainer = constructPdp(buyingFrameDto);
 
