@@ -10,6 +10,7 @@ Feature: APP Test
     * path 'health'
     * method GET
     * status 200
+    * match response.status == "UP"
 
 
   Scenario: Check App Info

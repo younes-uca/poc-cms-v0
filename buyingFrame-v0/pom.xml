@@ -31,6 +31,7 @@
 
         <ocr.version>3.4.0</ocr.version>
         <openapi.version>1.6.9</openapi.version>
+        <karate.version>1.4.1</karate.version>
 
         <poi.version>4.1.2</poi.version>
         <!--
@@ -142,7 +143,7 @@
         <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-core</artifactId>
-            <version>1.4.1</version>
+            <version>${karate.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intuit.karate</groupId>
@@ -153,9 +154,16 @@
         <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-junit5</artifactId>
-            <version>1.3.1</version>
+            <version>${karate.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.intuit.karate</groupId>
+            <artifactId>karate-gatling</artifactId>
+            <version>${karate.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -228,6 +236,28 @@
         </testResources>
 
         <plugins>
+
+            <!--<plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>4.5.0</version>
+                <configuration>
+                    <simulationsFolder>src/test/java</simulationsFolder>
+                    <includes>
+                        <include>ma.sqli.peps.BF.test.BFSimulation</include>
+                    </includes>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

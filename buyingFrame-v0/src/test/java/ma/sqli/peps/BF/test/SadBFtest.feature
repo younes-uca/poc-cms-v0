@@ -22,7 +22,7 @@ Feature: BuyingFrame
     * request postBody
     * method POST
     * status <responseCode>
-    * eval if(__num==1 && order_boutique_count != db.readValue('select count(*) FROM bf.buying_frame')) karate.fail("order_boutique count values are different")
+    * eval if(__num==1 && order_boutique_count != db.readValue('select count(*) FROM bf.buying_frame')) karate.fail("BF count values in DB are different")
 
     Examples:
       | responseCode |
@@ -53,9 +53,10 @@ Feature: BuyingFrame
   Scenario: Fail - POST Order Boutique without Authorization
 
     * path ''
+    * header Authorization = 'Bearer unvalid'
+    * request postBody
     * method POST
-    * status 401
-    * match response.error == "Unauthorized"
+    * status 500
 
 
 

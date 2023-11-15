@@ -3,6 +3,7 @@ function fn() {
 
     var config = {}
 
+    karate.log('karate.env =', karate.env);
 
     const rootUrlDev = 'http://localhost:8037/';
     const adminCredentialsDev = {"username": "admin","password": "123"};

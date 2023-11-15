@@ -12,7 +12,24 @@ Feature: BuyingFrame
     * postBody.code = uuid()
 
 
+  @save
   Scenario: POST Buying frame and GET it by ID
+    * path ''
+    * header Authorization = 'Bearer ' + adminToken
+    * request postBody
+    * method POST
+    * status 201
+
+
+    * path 'id', response.id
+    * header Authorization = 'Bearer ' + adminToken
+    * method GET
+    * status 400
+    * karate.match("each response contains FindAllSchema")
+
+
+  @put
+  Scenario: Update Buying frame and GET it by ID
     * path ''
     * header Authorization = 'Bearer ' + adminToken
     * request postBody
@@ -27,6 +44,7 @@ Feature: BuyingFrame
     * karate.match("each response contains FindAllSchema")
 
 
+  @delete
   Scenario: DELETE Buying frame and GET it
 
     # POST a BF
