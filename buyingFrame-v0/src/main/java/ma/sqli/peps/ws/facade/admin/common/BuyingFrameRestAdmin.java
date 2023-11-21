@@ -65,7 +65,14 @@ public class BuyingFrameRestAdmin extends AbstractController<BuyingFrame, Buying
         return super.save(dto);
     }
 
-
+    /*
+    POST
+    http://localhost:8037/api/admin/buyingFrame/send
+    {
+        "code":"bf-code-12",
+        "libelle":"bf-libelle-12"
+    }
+     */
     @Operation(summary = "send buyingFrame using Kafka Topic")
     @PostMapping("send")
     public ResponseEntity<String> send(@RequestBody BuyingFrameDto dto) {

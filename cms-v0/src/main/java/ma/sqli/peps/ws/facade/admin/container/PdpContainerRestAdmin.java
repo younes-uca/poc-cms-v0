@@ -104,6 +104,11 @@ public class PdpContainerRestAdmin extends AbstractController<PdpContainer, PdpC
         return findDtos(service.findByVersionId(id));
     }
 
+    /*
+    GET
+    http://localhost:8036/api/admin/pdpContainer/receive/buyingFrame/code/bf-code-12
+     */
+
     @Operation(summary = "find by version id")
     @GetMapping("receive/buyingFrame/code/{buyingFrameDtoAsString}")
     public ResponseEntity<String> receive(@PathVariable String buyingFrameDtoAsString) {
