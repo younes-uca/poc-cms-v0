@@ -1,7 +1,6 @@
 Feature: BuyingFrame
 
   Background:
-    * call read('karate-config.js')
     * call read('db_cleaner.js')
     * url bfUrl
     * header Content-Type = 'application/json'

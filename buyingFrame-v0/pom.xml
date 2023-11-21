@@ -163,6 +163,22 @@
             <version>${karate.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>3.9.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-codec-http</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.13.9</version>
+        </dependency>
 
 
         <dependency>
@@ -231,23 +247,49 @@
                 <directory>src/test/java</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
+                    <exclude>**/*.scala</exclude>
                 </excludes>
             </testResource>
         </testResources>
 
         <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>4.8.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <args>
+                                <arg>-Jbackend:GenBCode</arg>
+                                <arg>-Jdelambdafy:method</arg>
+                                <arg>-release:11</arg>
+                                <arg>-deprecation</arg>
+                                <arg>-feature</arg>
+                                <arg>-unchecked</arg>
+                                <arg>-language:implicitConversions</arg>
+                                <arg>-language:postfixOps</arg>
+                            </args>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!--<plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
-                <version>4.5.0</version>
+                <version>4.3.4</version>
                 <configuration>
                     <simulationsFolder>src/test/java</simulationsFolder>
                     <includes>
-                        <include>ma.sqli.peps.BF.test.BFSimulation</include>
+                        <include>ma.sqli.peps.BF.test.BfSimulation</include>
                     </includes>
+                    <runMultipleSimulations>true</runMultipleSimulations>
                 </configuration>
-
                 <executions>
                     <execution>
                         <phase>test</phase>
