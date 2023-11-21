@@ -15,14 +15,13 @@ public class TestRunner {
 
     @Karate.Test
     Karate HappyBFtest() {
-        return Karate.run("test/HappyBFtest").tags("@save").relativeTo(getClass());
+        return Karate.run("HappyBFtest").relativeTo(getClass());
     }
 
-/*
+
     @Karate.Test
     Karate SadBFtest() {
-        return Karate.run("test/SadBFtest").relativeTo(getClass());
+        return Karate.run("SadBFtest").relativeTo(getClass());
     }
-*/
 
 }

@@ -249,7 +249,7 @@
 
         <testResources>
             <testResource>
-                <directory>src/test/java/ma/sqli/peps</directory>
+                <directory>src/test/java</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
                     <exclude>**/*.scala</exclude>
