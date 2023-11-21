@@ -1,9 +1,7 @@
 Feature: BuyingFrame
 
   Background:
-    * call read('karate-config.js')
     * karate.log('karate.env =',karate.env)
-    * karate.log('config =',config)
     * call read('db_cleaner.js')
     * url bfUrl
     * header Content-Type = 'application/json'
@@ -23,11 +21,11 @@ Feature: BuyingFrame
     * status 201
 
 
-#    * path 'id', response.id
-#    * header Authorization = 'Bearer ' + adminToken
-#    * method GET
-#    * status 400
-#    * karate.match("each response contains FindAllSchema")
+    * path 'id', response.id
+    * header Authorization = 'Bearer ' + adminToken
+    * method GET
+    * status 200
+    * karate.match("each response contains FindAllSchema")
 
 
   @put

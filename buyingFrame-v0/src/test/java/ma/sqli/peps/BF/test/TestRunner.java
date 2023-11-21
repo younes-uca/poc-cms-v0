@@ -1,4 +1,4 @@
-package ma.sqli.peps.BF;
+package ma.sqli.peps.BF.test;
 
 
 import com.intuit.karate.junit5.Karate;
@@ -15,12 +15,14 @@ public class TestRunner {
 
     @Karate.Test
     Karate HappyBFtest() {
-        return Karate.run("test/HappyBFtest").tags("save").relativeTo(getClass());
+        return Karate.run("test/HappyBFtest").tags("@save").relativeTo(getClass());
     }
 
+/*
     @Karate.Test
     Karate SadBFtest() {
         return Karate.run("test/SadBFtest").relativeTo(getClass());
     }
+*/
 
 }

@@ -140,7 +140,7 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-core</artifactId>
             <version>${karate.version}</version>
@@ -150,6 +150,11 @@
             <artifactId>karate-apache</artifactId>
             <version>0.9.6</version>
             <scope>test</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>com.github.java-json-tools</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>2.2.8</version>
         </dependency>
         <dependency>
             <groupId>com.intuit.karate</groupId>
@@ -157,12 +162,12 @@
             <version>${karate.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-gatling</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
@@ -174,11 +179,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>2.13.9</version>
-        </dependency>
+        </dependency>-->
 
 
         <dependency>
@@ -244,7 +249,7 @@
 
         <testResources>
             <testResource>
-                <directory>src/test/java</directory>
+                <directory>src/test/java/ma/sqli/peps</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
                     <exclude>**/*.scala</exclude>
@@ -253,7 +258,7 @@
         </testResources>
 
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>4.8.1</version>
@@ -279,7 +284,7 @@
                 </executions>
             </plugin>
 
-            <!--<plugin>
+            <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>4.3.4</version>
@@ -308,6 +313,14 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <!--<includes>
+                        <include>demo/DemoTestParallel.java</include>
+                        <include>mock/contract/*Test.java</include>
+                        <include>mock/async/*Test.java</include>
+                        <include>BF/micro/*Runner.java</include>
+                        <include>mock/proxy/*Runner.java</include>
+                        <include>ssl/*Test.java</include>
+                    </includes>-->
                 </configuration>
             </plugin>
 
