@@ -1,4 +1,4 @@
-package ma.sqli.peps.karate.util;
+package ma.sqli.peps.BF.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,6 @@
 Feature: APP Test
 
   Background:
-    * call read('karate-config.js')
     * url actuatorUri
     * header Content-Type = 'application/json'
 

@@ -50,7 +50,7 @@ function fn() {
     config.adminUri = config.rootUrl + 'api/admin/';
     config.bfUrl = config.adminUri + 'buyingFrame/';
 
-    common = karate.callSingle('classpath:ma/sqli/peps/BF/test/common.feature', config);
+    common = karate.callSingle('classpath:common.feature', config);
     config.uniqueId = common.uniqueId
     config.db = common.db
     config.adminToken = common.adminToken

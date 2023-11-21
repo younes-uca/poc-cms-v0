@@ -34,6 +34,7 @@
         <karate.version>1.4.1</karate.version>
 
         <poi.version>4.1.2</poi.version>
+        <skipTests>false</skipTests>
         <!--
         <elasticsearch-rest-high-level.version>7.15.0</elasticsearch-rest-high-level.version>
         <elasticsearch-rest.version>8.6.2</elasticsearch-rest.version>
@@ -140,12 +141,12 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-core</artifactId>
             <version>${karate.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-apache</artifactId>
             <version>0.9.6</version>
@@ -156,19 +157,19 @@
             <artifactId>json-schema-validator</artifactId>
             <version>2.2.8</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-junit5</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
-        </dependency>
-       <!-- <dependency>
+        </dependency>-->
+       <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-gatling</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
-        </dependency>-->
-        <dependency>
+        </dependency>
+        <!-- <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
             <version>3.9.5</version>
@@ -178,12 +179,12 @@
                     <artifactId>netty-codec-http</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!--<dependency>
+        </dependency>-->
+        <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>2.13.9</version>
-        </dependency>-->
+        </dependency>
 
 
         <dependency>
@@ -258,7 +259,7 @@
         </testResources>
 
         <plugins>
-            <!--<plugin>
+            <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>4.8.1</version>
@@ -284,7 +285,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>4.3.4</version>
@@ -304,6 +305,27 @@
                     </execution>
                 </executions>
             </plugin>-->
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>4.3.4</version>
+                <configuration>
+                    <simulationsFolder>src/test/java</simulationsFolder>
+                    <includes>
+                        <include>ma.sqli.peps.BF.test.BfSimulation</include>
+                    </includes>
+                    <skip>${skipTests}</skip>
+                    <runMultipleSimulations>true</runMultipleSimulations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 
             <plugin>
@@ -313,14 +335,9 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <!--<includes>
-                        <include>demo/DemoTestParallel.java</include>
-                        <include>mock/contract/*Test.java</include>
-                        <include>mock/async/*Test.java</include>
-                        <include>BF/micro/*Runner.java</include>
-                        <include>mock/proxy/*Runner.java</include>
-                        <include>ssl/*Test.java</include>
-                    </includes>-->
+                    <includes>
+                        <include>ma/sqli/peps/BF/test/*.scala</include>
+                    </includes>
                 </configuration>
             </plugin>
 
