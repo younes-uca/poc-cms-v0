@@ -146,40 +146,23 @@
             <artifactId>karate-core</artifactId>
             <version>${karate.version}</version>
         </dependency>
-        <!--<dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-apache</artifactId>
-            <version>0.9.6</version>
-            <scope>test</scope>
-        </dependency>-->
         <dependency>
             <groupId>com.github.java-json-tools</groupId>
             <artifactId>json-schema-validator</artifactId>
             <version>2.2.8</version>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-junit5</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
        <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-gatling</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- <dependency>
-            <groupId>io.gatling.highcharts</groupId>
-            <artifactId>gatling-charts-highcharts</artifactId>
-            <version>3.9.5</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-codec-http</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>-->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -250,6 +233,9 @@
 
         <testResources>
             <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
                 <directory>src/test/java</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
@@ -285,26 +271,6 @@
                 </executions>
             </plugin>
 
-            <!--<plugin>
-                <groupId>io.gatling</groupId>
-                <artifactId>gatling-maven-plugin</artifactId>
-                <version>4.3.4</version>
-                <configuration>
-                    <simulationsFolder>src/test/java</simulationsFolder>
-                    <includes>
-                        <include>ma.sqli.peps.BF.test.BfSimulation</include>
-                    </includes>
-                    <runMultipleSimulations>true</runMultipleSimulations>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>

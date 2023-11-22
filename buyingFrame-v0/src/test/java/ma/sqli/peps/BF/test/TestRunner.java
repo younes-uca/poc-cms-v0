@@ -1,7 +1,7 @@
 package ma.sqli.peps.BF.test;
 
 
-//import com.intuit.karate.junit5.Karate;
+import com.intuit.karate.junit5.Karate;
 import org.junit.jupiter.api.BeforeAll;
 
 
@@ -13,7 +13,7 @@ public class TestRunner {
         System.setProperty("karate.env", "dev");
     }
 
-/*
+
     @Karate.Test
     Karate HappyBFtest() {
         return Karate.run("HappyBFtest").relativeTo(getClass());
@@ -25,5 +25,5 @@ public class TestRunner {
     Karate SadBFtest() {
         return Karate.run("SadBFtest").relativeTo(getClass());
     }
-*/
+
 }
